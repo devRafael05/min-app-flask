@@ -1,31 +1,7 @@
-version: '3.8'
-
 services:
   flask_app:
     build: .
+    pull_policy: build
     ports:
-      - "5000:5000"
-    networks:
-      - web
-
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./certbot/www:/var/www/certbot
-      - ./certbot/letsencrypt:/etc/letsencrypt
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - web
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certbot/www:/var/www/certbot
-      - ./certbot/letsencrypt:/etc/letsencrypt
-    command: certonly --webroot -w /var/www/certbot -d seu-dominio.com -d www.seu-dominio.com --email seuemail@example.com --agree-tos --no-eff-email --force-renewal
-
-networks:
-  web:
+      - "3030:5000"
+    restart: always
