@@ -1,7 +1,6 @@
 services:
   flask_app:
-    build: .
-    pull_policy: build
+    image: your-registry-username/flask_app:latest  # Use a pre-built image
     ports:
       - "3030:5000"
     restart: always
